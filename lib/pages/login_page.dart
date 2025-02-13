@@ -2,12 +2,18 @@ import 'package:chat_app/components/my_button.dart';
 import 'package:chat_app/components/my_textfield.dart';
 import 'package:flutter/material.dart';
 
-//email and pw text controller
-final TextEditingController _emailController = TextEditingController();
-final TextEditingController _pwController = TextEditingController();
-
 class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+//email and pw text controller
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _pwController = TextEditingController();
+
+//tap to go to register page
+  final void Function()? onTap;
+
+  LoginPage({super.key, required this.onTap});
+
+  //login method
+  void login() {}
 
   @override
   Widget build(BuildContext context) {
@@ -53,10 +59,31 @@ class LoginPage extends StatelessWidget {
             const SizedBox(height: 25),
             //login button
             MyButton(
-              text:"Login",
-            )
+              text: "Login",
+              onTap: login,
+            ),
 
+            const SizedBox(height: 25),
             //register now
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Not a member ?",
+                  style:
+                      TextStyle(color: Theme.of(context).colorScheme.primary),
+                ),
+                GestureDetector(
+                  onTap: onTap,
+                  child: Text(
+                    " Register now",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.primary),
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),
