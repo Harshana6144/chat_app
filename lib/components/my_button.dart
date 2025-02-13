@@ -7,12 +7,13 @@ class MyButton extends StatelessWidget {
   const MyButton({
     super.key,
     required this.text,
+    required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: ,
+      onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
             color: Theme.of(context).colorScheme.secondary,
@@ -20,7 +21,7 @@ class MyButton extends StatelessWidget {
         padding: EdgeInsets.all(25),
         margin: EdgeInsets.symmetric(horizontal: 25),
         child: Center(
-          child: Text("Button"),
+          child: Text(text),
         ),
       ),
     );
