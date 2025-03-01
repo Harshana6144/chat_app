@@ -14,13 +14,26 @@ class RegisterPage extends StatelessWidget {
   RegisterPage({super.key, required this.onTap});
 
   //register method
-  void register() {
+  void register(BuildContext context) {
     final _auth = AuthService();
 
-    _auth.signInWithEmailPassword(
+
+    //password match - >controller
+    if(_pwController.text == _confirmPwController.text){
+      try{
+        _auth.signInWithEmailPassword(
       _emailController.text,
       _pwController.text,
     );
+      }catch (e){
+         showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text(e.toString()),
+        ),
+      );
+      }
+    }
   }
 
   @override
@@ -77,7 +90,7 @@ class RegisterPage extends StatelessWidget {
             //login button
             MyButton(
               text: "Register",
-              onTap: register,
+              onTap: () => register(context),
             ),
 
             const SizedBox(height: 25),
