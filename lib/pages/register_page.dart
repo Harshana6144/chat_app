@@ -15,24 +15,34 @@ class RegisterPage extends StatelessWidget {
 
   //register method
   void register(BuildContext context) {
+    //get auth service
     final _auth = AuthService();
 
+    //password match -> craete user
+    if (_pwController.text == _confirmPwController.text) {
+      try {
+        _auth.signUpWithEmailPassword(
+          _emailController.text,
+          _pwController.text,
+        );
+      } catch (e) {
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text(e.toString()),
+          ),
+        );
+      }
+    }
 
-    //password match - >controller
-    if(_pwController.text == _confirmPwController.text){
-      try{
-        _auth.signInWithEmailPassword(
-      _emailController.text,
-      _pwController.text,
-    );
-      }catch (e){
-         showDialog(
+    //password dont match -> show error to user
+    else {
+      showDialog(
         context: context,
-        builder: (context) => AlertDialog(
-          title: Text(e.toString()),
+        builder: (context) => const AlertDialog(
+          title: Text("Password don't match"),
         ),
       );
-      }
     }
   }
 
