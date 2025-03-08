@@ -23,7 +23,7 @@ class ChatService {
 ]
 
 */
-  Stream<List<Map<String, dynamic>>> getUserStress() {
+  Stream<List<Map<String, dynamic>>> getUsersStream() {
     return _firestore.collection('users').snapshots().map((snapshot) {
       return snapshot.docs.map((doc) {
         // go thought each individal user
